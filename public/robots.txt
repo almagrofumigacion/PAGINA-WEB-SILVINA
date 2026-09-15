@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site/sitemap.xml

@@ -1,0 +1,332 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  AtSign,
+  Check,
+  Compass,
+  GraduationCap,
+  HeartHandshake,
+  Link2,
+  Menu,
+  MessageCircle,
+  MonitorPlay,
+  UserRound,
+  UsersRound,
+} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+const WHATSAPP_URL =
+  "https://wa.me/5491160571233?text=Hola%20Silvina%2C%20me%20gustar%C3%ADa%20agendar%20un%20turno.";
+const INSTAGRAM_URL = "https://www.instagram.com/consultorio_vinculandonos";
+
+const navItems = [
+  ["Inicio", "#inicio"],
+  ["Sobre mí", "#sobre-mi"],
+  ["Acompañamiento", "#acompanamiento"],
+  ["Modalidad", "#modalidad"],
+  ["Preguntas frecuentes", "#preguntas"],
+  ["Contacto", "#contacto"],
+];
+
+const people = [
+  {
+    title: "Jóvenes y adultos",
+    text: "Un espacio individual para trabajar diferentes situaciones emocionales, personales y vinculares.",
+    icon: UserRound,
+    number: "01",
+  },
+  {
+    title: "Argentinos en el exterior",
+    text: "Acompañamiento psicológico online para atravesar procesos migratorios, cambios culturales y vínculos a distancia.",
+    icon: Compass,
+    number: "02",
+  },
+  {
+    title: "Adolescentes",
+    text: "Acompañamiento durante una etapa atravesada por importantes cambios personales, vinculares y emocionales.",
+    icon: HeartHandshake,
+    number: "03",
+  },
+  {
+    title: "Familias",
+    text: "Orientación a madres, padres y referentes adultos para acompañar situaciones relacionadas con adolescentes y jóvenes.",
+    icon: UsersRound,
+    number: "04",
+  },
+];
+
+const topics = [
+  "Vínculos",
+  "Ansiedad",
+  "Angustia",
+  "Duelos",
+  "Migraciones",
+  "Sexualidad y género",
+  "Cambios personales",
+  "Adolescencia",
+];
+
+const experience = [
+  ["2006 — 2012", "Licenciada en Psicología", "Universidad de Buenos Aires"],
+  ["2015 — Actualidad", "Fundadora y Psicóloga", "Espacio Vinculándonos"],
+  ["2020 — 2024", "Coordinadora de Equipo de Orientación Escolar", "Instituto Club Atlético Banfield"],
+  ["2023 — 2024", "Psicóloga · Equipo Multidisciplinario", "Consultorio Faro Sur"],
+  ["2018 — 2020", "Psicóloga en Equipo Técnico", "Servicio Local de Niñez · Desarrollo Social Lomas de Zamora"],
+  ["2016 — 2017", "Asesora Profesional en Discapacidad", "Grupo OSDE"],
+];
+
+const faq = [
+  ["¿Las sesiones son online?", "Sí. La atención se realiza de manera online."],
+  ["¿Atendés personas que viven fuera de Argentina?", "Sí. La modalidad online permite acompañar también a argentinos que actualmente viven en el exterior."],
+  ["¿Trabajás con adolescentes?", "Sí. También acompaño adolescentes y trabajo con sus familias cuando la situación lo requiere."],
+  ["¿Cómo puedo consultar por un turno?", "Podés comunicarte directamente por WhatsApp para consultar disponibilidad."],
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": ["Psychologist", "ProfessionalService"],
+  name: "Lic. Silvina De Simone",
+  alternateName: "Consultorio Vinculándonos",
+  url: "https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site",
+  image: "https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site/silvina-hero.png",
+  telephone: "+5491160571233",
+  sameAs: [INSTAGRAM_URL],
+  availableLanguage: "es",
+  areaServed: ["Argentina", "Worldwide"],
+  serviceType: ["Psicología online", "Terapia online"],
+  founder: { "@type": "Person", name: "Silvina De Simone", jobTitle: "Licenciada en Psicología" },
+};
+
+function WhatsappButton({ children, className = "button" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <a className={className} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label={`${children} por WhatsApp`}>
+      {children} <ArrowUpRight size={17} aria-hidden="true" />
+    </a>
+  );
+}
+
+export default function Home() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
+      <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+        <div className="shell header-inner">
+          <a className="brand" href="#inicio" aria-label="Vinculándonos, volver al inicio">
+            <span className="brand-mark" aria-hidden="true">V</span>
+            <span>Vinculándonos</span>
+          </a>
+          <nav className="desktop-nav" aria-label="Navegación principal">
+            {navItems.slice(0, 5).map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+          </nav>
+          <WhatsappButton className="button button-small desktop-contact">Agendar un turno</WhatsappButton>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="menu-button" type="button" aria-label="Abrir menú"><Menu aria-hidden="true" /></button>
+            </SheetTrigger>
+            <SheetContent className="mobile-sheet">
+              <SheetHeader className="mobile-sheet-header">
+                <SheetTitle className="mobile-sheet-title">Vinculándonos</SheetTitle>
+                <SheetDescription>Psicología online</SheetDescription>
+              </SheetHeader>
+              <nav className="mobile-nav" aria-label="Navegación móvil">
+                {navItems.map(([label, href], index) => (
+                  <SheetClose asChild key={href}><a href={href}><span>0{index + 1}</span>{label}</a></SheetClose>
+                ))}
+              </nav>
+              <div className="mobile-sheet-action"><WhatsappButton>Agendar un turno</WhatsappButton></div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+
+      <main>
+        <section className="hero" id="inicio">
+          <figure className="shell hero-frame">
+            <Image
+              className="hero-image"
+              src="/silvina-hero.png"
+              alt="Lic. Silvina De Simone, psicóloga y fundadora de Consultorio Vinculándonos"
+              width={1600}
+              height={900}
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+            />
+            <span className="hero-gradient" aria-hidden="true" />
+            <div className="hero-copy">
+              <p className="eyebrow"><span aria-hidden="true" /> Psicología online</p>
+              <h1>Psicóloga online para jóvenes y adultos</h1>
+              <p className="hero-lead">Un espacio de escucha y acompañamiento para trabajar aquello que hoy te preocupa, te angustia o genera malestar.</p>
+              <p className="hero-secondary">Atención online para jóvenes y adultos, incluyendo argentinos que viven en el exterior.</p>
+              <div className="hero-actions">
+                <WhatsappButton>Agendar un turno</WhatsappButton>
+                <a className="text-link" href="#sobre-mi">Conocer más <ArrowDown size={15} aria-hidden="true" /></a>
+              </div>
+            </div>
+            <figcaption><strong>Lic. Silvina De Simone</strong><span>Psicóloga · UBA</span></figcaption>
+          </figure>
+        </section>
+
+        <section className="about section" id="sobre-mi">
+          <div className="shell about-grid">
+            <div className="section-heading reveal">
+              <p className="section-number">01 · Sobre mí</p>
+              <h2>Un espacio para poder hablar de lo que te pasa</h2>
+            </div>
+            <div className="about-copy reveal">
+              <p className="large-copy">Soy Silvina De Simone, Licenciada en Psicología en la Universidad de Buenos Aires. Desde hace más de 13 años acompaño a adolescentes, jóvenes, adultos y familias en distintos momentos y procesos de sus vidas.</p>
+              <p>Mi trabajo busca ofrecer un espacio de escucha, reflexión y acompañamiento, respetando los tiempos, experiencias y particularidades de cada persona.</p>
+              <div className="credentials" aria-label="Información profesional destacada">
+                <div><strong>+13</strong><span>años de experiencia</span></div>
+                <div><GraduationCap aria-hidden="true" /><span>Licenciada en Psicología · UBA</span></div>
+                <div><MonitorPlay aria-hidden="true" /><span>Atención online</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="people-section section" id="acompanamiento">
+          <div className="shell">
+            <div className="section-heading split-heading reveal">
+              <div><p className="section-number">02 · Acompañamiento</p><h2>¿A quién está dirigido?</h2></div>
+              <p>La consulta puede abrir un espacio propio o acompañar un proceso familiar. Cada recorrido comienza desde una situación singular.</p>
+            </div>
+            <div className="people-grid">
+              {people.map(({ title, text, icon: Icon, number }) => (
+                <article className="person-card reveal" key={title}>
+                  <div className="card-top"><Icon aria-hidden="true" /><span>{number}</span></div>
+                  <h3>{title}</h3><p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="topics-section section" aria-labelledby="topics-title">
+          <div className="shell topics-grid">
+            <div className="topics-intro reveal">
+              <p className="section-number light">03 · Motivos de consulta</p>
+              <h2 id="topics-title">Algunas situaciones que podemos trabajar</h2>
+              <p>Lo que te pasa no necesita encajar en una etiqueta para encontrar un lugar de escucha.</p>
+            </div>
+            <div className="topic-list reveal">
+              {topics.map((topic, index) => <div key={topic}><span>0{index + 1}</span><h3>{topic}</h3><ArrowRight aria-hidden="true" /></div>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="online-section section" id="modalidad">
+          <div className="shell online-card reveal">
+            <div className="orbit" aria-hidden="true"><span><MonitorPlay /></span></div>
+            <div className="online-copy">
+              <p className="section-number">04 · Modalidad</p>
+              <h2>Terapia online, estés donde estés</h2>
+              <p>Las sesiones se realizan de manera online, permitiendo sostener un espacio terapéutico independientemente del lugar en el que estés viviendo.</p>
+              <div className="highlight"><Compass aria-hidden="true" /><span>Atención para argentinos en el exterior.</span></div>
+              <WhatsappButton>Agendar un turno</WhatsappButton>
+            </div>
+          </div>
+        </section>
+
+        <section className="experience section" aria-labelledby="experience-title">
+          <div className="shell experience-grid">
+            <div className="experience-heading reveal">
+              <p className="section-number">05 · Recorrido profesional</p>
+              <h2 id="experience-title">Experiencia y formación</h2>
+              <p>Un recorrido clínico e institucional que aporta una mirada amplia, sensible y comprometida.</p>
+              <div className="continuous-learning"><Check aria-hidden="true" /><span>Formación continua en adolescencia, discapacidad, diversidad, sexualidad, género y evaluación psicológica.</span></div>
+            </div>
+            <ol className="timeline reveal">
+              {experience.map(([date, role, place]) => (
+                <li key={`${role}-${place}`}><span className="timeline-dot" aria-hidden="true" /><time>{date}</time><h3>{role}</h3><p>{place}</p></li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="main-cta section">
+          <div className="shell main-cta-inner reveal">
+            <span className="cta-icon" aria-hidden="true"><Link2 /></span>
+            <h2>Dar el primer paso también puede ser parte del proceso.</h2>
+            <p>Si querés realizar una consulta o conocer la disponibilidad de turnos, podés escribirme.</p>
+            <WhatsappButton>Agendar un turno</WhatsappButton>
+          </div>
+        </section>
+
+        <section className="faq-section section" id="preguntas">
+          <div className="shell faq-grid">
+            <div className="section-heading reveal">
+              <p className="section-number">06 · Información útil</p>
+              <h2>Preguntas frecuentes</h2>
+              <p className="faq-intro">Algunas respuestas para orientarte antes de hacer tu consulta.</p>
+            </div>
+            <Accordion type="single" collapsible className="faq-list reveal">
+              {faq.map(([question, answer], index) => (
+                <AccordionItem value={`item-${index}`} key={question} className="faq-item">
+                  <AccordionTrigger className="faq-trigger"><span><small>0{index + 1}</small>{question}</span></AccordionTrigger>
+                  <AccordionContent className="faq-answer">{answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        <section className="contact-section section" id="contacto">
+          <div className="shell contact-grid reveal">
+            <div className="contact-heading">
+              <p className="section-number light">07 · Contacto</p>
+              <h2>¿Querés hacer una consulta?</h2>
+              <p>Podés escribirme para conocer la disponibilidad de atención psicológica online.</p>
+            </div>
+            <div className="contact-card">
+              <div><span className="contact-avatar">SD</span><p><strong>Lic. Silvina De Simone</strong><small>Consultorio Vinculándonos</small></p></div>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Escribir a Silvina por WhatsApp"><MessageCircle aria-hidden="true" /><span><small>WhatsApp</small>+54 9 11 6057-1233</span><ArrowUpRight aria-hidden="true" /></a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram de Consultorio Vinculándonos"><AtSign aria-hidden="true" /><span><small>Instagram</small>@consultorio_vinculandonos</span><ArrowUpRight aria-hidden="true" /></a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <div className="shell footer-top">
+          <div><a className="brand footer-brand" href="#inicio"><span className="brand-mark" aria-hidden="true">V</span><span>Vinculándonos</span></a><p>Lic. Silvina De Simone<br />Psicología · Atención online</p></div>
+          <nav aria-label="Enlaces del pie de página">{navItems.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</nav>
+          <div className="footer-social"><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={14} aria-hidden="true" /></a><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
+        </div>
+        <div className="shell footer-bottom"><span>© {new Date().getFullYear()} Consultorio Vinculándonos</span><span>Atención online</span></div>
+      </footer>
+
+      <a className="whatsapp-float" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Agendar un turno por WhatsApp"><MessageCircle aria-hidden="true" /><span>Agendar un turno</span></a>
+    </>
+  );
+}
