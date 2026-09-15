@@ -237,7 +237,7 @@ h1 { max-width: 550px; margin: 0; font-family: Georgia, 'Times New Roman', serif
   .desktop-contact { display: none; }
   .menu-button { display: grid; }
   .hero { height: auto; min-height: 0; padding: 84px 0 28px; }
-  .hero-frame { width: min(100% - 30px, 650px); max-width: none; height: auto; overflow: hidden; border-radius: 22px; background: #f1eee7; }
+  .hero-frame { width: min(100% - 30px, 650px); max-width: none; height: auto; overflow: hidden; border-radius: 22px; background: #f1eee7; margin-inline: auto; }
   .hero-image { width: 100%; height: auto; object-fit: initial; object-position: initial; }
   .hero-gradient { display: none; }
   .hero-copy { width: auto; position: static; padding: 27px 21px 25px; transform: none; color: #28312c; }
@@ -250,7 +250,7 @@ h1 { max-width: 550px; margin: 0; font-family: Georgia, 'Times New Roman', serif
   .hero-actions .button, .text-link { width: 100%; }
   .hero .button { color: #fff; border-color: #315443; background: #315443; }
   .text-link { color: #315443; border: 0; justify-content: center; }
-  .hero-frame figcaption { display: grid; top: calc((100vw - 30px) * .5625 - 50px); left: 0; right: 0; text-align: center; justify-items: center; bottom: auto; }
+  .hero-frame figcaption { display: grid; top: calc((100vw - 30px) * .5625 - 50px); right: 16px; bottom: auto; }
   .hero-frame figcaption strong { font-size: .88rem; }
   .hero-frame figcaption span { font-size: .72rem; }
   .about-grid, .split-heading, .topics-grid, .online-card, .experience-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; }
