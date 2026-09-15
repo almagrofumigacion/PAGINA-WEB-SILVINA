@@ -138,12 +138,11 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-      <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-        <div className="shell header-inner">
-          <a className="brand" href="#inicio" aria-label="Vinculándonos, volver al inicio">
-            <span className="brand-mark" aria-hidden="true">V</span>
-            <span>Vinculándonos</span>
-          </a>
+      <header className={`site-header ${scrolled ? "is-scrolled" : ""}`} style={{ padding: "12px 0", background: "transparent", borderBottomColor: "transparent", backdropFilter: "none", boxShadow: "none" }}>
+        <div className="shell header-inner" style={{ minHeight: "64px", padding: "0 18px", borderRadius: "22px", background: scrolled ? "transparent" : "rgba(247,244,237,.92)", border: `1px solid ${scrolled ? "transparent" : "rgba(49,84,67,.14)"}`, backdropFilter: scrolled ? "none" : "blur(16px)", boxShadow: scrolled ? "none" : "0 10px 28px rgba(43,58,49,.08)", transition: "background .25s ease, border-color .25s ease, box-shadow .25s ease" }}>
+          <a className="brand" href="#inicio" aria-label="Lic. Silvina De Simone, volver al inicio" style={{ fontSize: "clamp(1.04rem, 2.5vw, 1.25rem)", color: "#28312c" }}>
+            
+            <span>Lic. Silvina De Simone</span> </a>
           <nav className="desktop-nav" aria-label="Navegación principal">
             {navItems.slice(0, 5).map(([label, href]) => <a key={href} href={href}>{label}</a>)}
           </nav>
