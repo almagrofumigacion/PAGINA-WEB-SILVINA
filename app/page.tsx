@@ -111,9 +111,9 @@ const structuredData = {
 
 const loaderStyles = `
   @keyframes silvina-loader-name {
-    0% { opacity: 0; transform: translateY(20px) scale(.98); filter: blur(8px); letter-spacing: .12em; }
-    58% { opacity: 1; filter: blur(0); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); letter-spacing: .01em; }
+    0% { opacity: 0; transform: translateY(115%); }
+    62% { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0); }
   }
   @keyframes silvina-loader-track {
     from { opacity: 0; transform: translateY(8px); }
@@ -167,19 +167,23 @@ export default function Home() {
           }}
         >
           <style>{loaderStyles}</style>
-          <div style={{ width: "min(78vw, 390px)", color: "#28312c" }}>
-            <p
-              style={{
-                margin: 0,
-                fontFamily: "Georgia, 'Times New Roman', serif",
-                fontSize: "clamp(1.55rem, 4vw, 2.25rem)",
-                fontWeight: 600,
-                letterSpacing: ".01em",
-                animation: "silvina-loader-name 1.45s cubic-bezier(.16,1,.3,1) .18s both",
-              }}
-            >
-              Lic. Silvina De Simone
-            </p>
+          <div style={{ width: "min(92vw, 450px)", color: "#28312c" }}>
+            <div style={{ overflow: "hidden", padding: "0 0 .18em" }}>
+              <p
+                style={{
+                  margin: 0,
+                  whiteSpace: "nowrap",
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  fontSize: "clamp(1.25rem, 3.2vw, 2.25rem)",
+                  fontWeight: 600,
+                  letterSpacing: ".01em",
+                  willChange: "transform, opacity",
+                  animation: "silvina-loader-name 1.3s cubic-bezier(.22,1,.36,1) .16s both",
+                }}
+              >
+                Lic. Silvina De Simone
+              </p>
+            </div>
             <div style={{ height: "2px", marginTop: "28px", overflow: "hidden", background: "rgba(49,84,67,.16)", animation: "silvina-loader-track .65s cubic-bezier(.16,1,.3,1) .52s both" }}>
               <span style={{ display: "block", width: "100%", height: "100%", background: "#315443", animation: "silvina-loader-line 2.05s cubic-bezier(.22,.9,.3,1) .68s both" }} />
             </div>
