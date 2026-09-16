@@ -109,6 +109,17 @@ const structuredData = {
   founder: { "@type": "Person", name: "Silvina De Simone", jobTitle: "Licenciada en Psicología" },
 };
 
+const loaderStyles = `
+  @keyframes silvina-loader-name {
+    from { opacity: 0; transform: translateY(16px); letter-spacing: .09em; }
+    to { opacity: 1; transform: translateY(0); letter-spacing: .01em; }
+  }
+  @keyframes silvina-loader-line {
+    from { transform: scaleX(0); transform-origin: left; }
+    to { transform: scaleX(1); transform-origin: left; }
+  }
+`;
+
 function WhatsappButton({ children, className = "button" }: { children: React.ReactNode; className?: string }) {
   return (
     <a className={className} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label={`${children} por WhatsApp`}>
@@ -119,6 +130,7 @@ function WhatsappButton({ children, className = "button" }: { children: React.Re
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -127,9 +139,48 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoading(false), 1450);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
+      {loading && (
+        <div
+          role="status"
+          aria-label="Cargando sitio"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 100,
+            display: "grid",
+            placeItems: "center",
+            background: "#f7f4ed",
+          }}
+        >
+          <style>{loaderStyles}</style>
+          <div style={{ width: "min(78vw, 390px)", color: "#28312c" }}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "Georgia, 'Times New Roman', serif",
+                fontSize: "clamp(1.55rem, 4vw, 2.25rem)",
+                fontWeight: 700,
+                letterSpacing: ".01em",
+                animation: "silvina-loader-name .8s cubic-bezier(.22,.8,.24,1) both",
+              }}
+            >
+              Lic. Silvina De Simone
+            </p>
+            <div style={{ height: "2px", marginTop: "24px", overflow: "hidden", background: "rgba(49,84,67,.18)" }}>
+              <span style={{ display: "block", width: "100%", height: "100%", background: "#315443", animation: "silvina-loader-line 1.25s cubic-bezier(.2,.75,.25,1) .12s both" }} />
+            </div>
+          </div>
+        </div>
+      )}
 
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`} style={{ padding: "12px 0", background: "transparent", borderBottomColor: "transparent", backdropFilter: "none", boxShadow: "none" }}>
         <div className="shell header-inner" style={{ minHeight: "64px", padding: "0 18px", borderRadius: "22px", background: scrolled ? "rgba(247,244,237,.62)" : "rgba(247,244,237,.92)", border: `1px solid ${scrolled ? "transparent" : "rgba(49,84,67,.14)"}`, backdropFilter: "blur(16px)", boxShadow: scrolled ? "none" : "0 10px 28px rgba(43,58,49,.08)", transition: "background .25s ease, border-color .25s ease, box-shadow .25s ease" }}>
@@ -171,12 +222,13 @@ export default function Home() {
               width={1600}
               height={900}
               priority
+              quality={100}
               fetchPriority="high"
-              sizes="100vw"
+              sizes="(max-width: 780px) 100vw, 1600px"
             />
             <span className="hero-gradient" aria-hidden="true" />
             <div className="hero-copy">
-              <p className="eyebrow"><span aria-hidden="true" /> Lic. Silvina De Simone · Psicóloga · UBA</p>
+              <p className="eyebrow"><span aria-hidden="true" /> Lic. Silvina De Simone</p>
               <h1>Terapia para jóvenes y adultos.</h1>
               <p className="hero-lead">Todos necesitamos que nos escuchen. Si necesitás hablar, podés escribirme.</p>
               <p className="hero-secondary">Atención online para jóvenes, adultos, terapia de parejas y argentinos en el extranjero.</p>
@@ -228,7 +280,7 @@ export default function Home() {
           <div className="shell topics-grid">
             <div className="topics-intro reveal">
               <p className="section-number light">03 · Motivos de consulta</p>
-              <h2 id="topics-title">Lo que te pasa no necesita <em style={{ fontStyle: "italic", color: "#d8e8dc" }}>encajar</em> en una <span style={{ textDecoration: "underline", textUnderlineOffset: "0.16em", textDecorationThickness: "1px" }}>etiqueta</span> para encontrar un lugar de escucha.</h2>
+              <h2 id="topics-title" style={{ maxWidth: "17ch", fontSize: "clamp(2.6rem, 4.1vw, 4.75rem)", lineHeight: 1.02, letterSpacing: "-.045em", textWrap: "balance" }}>Lo que te pasa no necesita <em style={{ color: "#f0ddb1", fontStyle: "italic", whiteSpace: "nowrap" }}>encajar</em> en una etiqueta para encontrar un lugar de escucha.</h2>
             </div>
             <div className="topic-list reveal">
               {topics.map((topic) => <div key={topic} style={{ gridTemplateColumns: "1fr auto" }}><h3>{topic}</h3><ArrowRight aria-hidden="true" /></div>)}
