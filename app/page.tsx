@@ -228,11 +228,10 @@ export default function Home() {
           <div className="shell topics-grid">
             <div className="topics-intro reveal">
               <p className="section-number light">03 · Motivos de consulta</p>
-              <h2 id="topics-title">Algunas situaciones que podemos trabajar</h2>
-              <p>Lo que te pasa no necesita encajar en una etiqueta para encontrar un lugar de escucha.</p>
+              <h2 id="topics-title">Lo que te pasa no necesita <em style={{ fontStyle: "italic", color: "#d8e8dc" }}>encajar</em> en una <span style={{ textDecoration: "underline", textUnderlineOffset: "0.16em", textDecorationThickness: "1px" }}>etiqueta</span> para encontrar un lugar de escucha.</h2>
             </div>
             <div className="topic-list reveal">
-              {topics.map((topic, index) => <div key={topic}><span>0{index + 1}</span><h3>{topic}</h3><ArrowRight aria-hidden="true" /></div>)}
+              {topics.map((topic) => <div key={topic} style={{ gridTemplateColumns: "1fr auto" }}><h3>{topic}</h3><ArrowRight aria-hidden="true" /></div>)}
             </div>
           </div>
         </section>
