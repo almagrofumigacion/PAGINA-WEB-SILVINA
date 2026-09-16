@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   AtSign,
-  Check,
   Compass,
   GraduationCap,
   HeartHandshake,
@@ -74,11 +73,11 @@ const people = [
   },
 ];
 
-const personCardImages: Record<string, string> = {
-  "Jóvenes y adultos": "/jovenes-adultos-preview.png",
-  "Argentinos en el exterior": "/argentinos-exterior.png",
-  "Adolescentes": "/adolescentes.png",
-  "Familias": "/familias.png",
+const personCardBackgrounds: Record<string, string> = {
+  "Jóvenes y adultos": "person-card-featured",
+  "Argentinos en el exterior": "person-card-exterior",
+  "Adolescentes": "person-card-adolescents",
+  "Familias": "person-card-families",
 };
 
 const topics = [
@@ -143,6 +142,7 @@ function WhatsappButton({ children, className = "button" }: { children: React.Re
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [globeTilt, setGlobeTilt] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -150,6 +150,13 @@ export default function Home() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleGlobePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    setGlobeTilt({ x: -y * 15, y: x * 18 });
+  };
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLoading(false), 2950);
@@ -282,29 +289,12 @@ export default function Home() {
               <p>La primera consulta puede ayudarnos a revisar por dónde empezar.</p>
             </div>
             <div className="people-grid">
-              {people.map(({ title, text, icon: Icon, number }) => {
-                const image = personCardImages[title];
-                const imageStyle = image
-                  ? {
-                      color: "#f7f4ed",
-                      borderColor: "transparent",
-                      backgroundImage: `linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.77) 52%, rgba(31,69,55,.2) 100%), url('${image}')`,
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                    }
-                  : undefined;
-
-                return (
-                  <article className="person-card reveal" key={title} style={imageStyle}>
-                    <div className="card-top" style={image ? { color: "rgba(247,244,237,.86)" } : undefined}>
-                      <Icon aria-hidden="true" />
-                      <span>{number}</span>
-                    </div>
-                    <h3 style={image ? { color: "#fffdf8" } : undefined}>{title}</h3>
-                    <p style={image ? { color: "rgba(247,244,237,.86)" } : undefined}>{text}</p>
-                  </article>
-                );
-              })}
+              {people.map(({ title, text, icon: Icon, number }) => (
+                <article className={`person-card reveal ${personCardBackgrounds[title] ?? ""}`} key={title}>
+                  <div className="card-top"><Icon aria-hidden="true" /><span>{number}</span></div>
+                  <h3>{title}</h3><p>{text}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -323,7 +313,29 @@ export default function Home() {
 
         <section className="online-section section" id="modalidad">
           <div className="shell online-card reveal">
-            <div className="orbit" aria-hidden="true"><span><MonitorPlay /></span></div>
+            <div
+              className="interactive-globe"
+              aria-label="Globo decorativo interactivo"
+              onPointerMove={handleGlobePointerMove}
+              onPointerLeave={() => setGlobeTilt({ x: 0, y: 0 })}
+              style={{ "--globe-x": `${globeTilt.x}deg`, "--globe-y": `${globeTilt.y}deg` } as React.CSSProperties}
+            >
+              <span className="globe-halo globe-halo-one" aria-hidden="true" />
+              <span className="globe-halo globe-halo-two" aria-hidden="true" />
+              <div className="globe-sphere" aria-hidden="true">
+                <Image
+                  src="/earth-wireframe.png"
+                  alt=""
+                  fill
+                  sizes="(max-width: 780px) 60vw, 250px"
+                  className="earth-image"
+                />
+                <span className="globe-glow" />
+              </div>
+              <span className="globe-orbit globe-orbit-one" aria-hidden="true" />
+              <span className="globe-orbit globe-orbit-two" aria-hidden="true" />
+              <span className="globe-caption">Atención sin fronteras</span>
+            </div>
             <div className="online-copy">
               <p className="section-number">04 · Modalidad</p>
               <h2>Terapia online, estés donde estés</h2>
@@ -335,12 +347,31 @@ export default function Home() {
         </section>
 
         <section className="experience section" aria-labelledby="experience-title">
-          <div className="shell experience-grid" style={{ gridTemplateColumns: "1fr" }}>
+          <div className="shell experience-grid">
             <div className="experience-heading reveal">
               <p className="section-number">05 · Recorrido profesional</p>
               <h2 id="experience-title">Experiencia y formación</h2>
-              <p>Un recorrido clínico e institucional que aporta una mirada amplia, sensible y comprometida.</p>
-              <div className="continuous-learning"><Check aria-hidden="true" /><span>Formación continua en adolescencia, discapacidad, diversidad, sexualidad, género y evaluación psicológica.</span></div>
+              <p>Una práctica sostenida en la escucha, la formación continua y el respeto por la singularidad de cada historia.</p>
+            </div>
+            <div className="experience-content reveal">
+              <p className="experience-statement">
+                No se trata de encajar en una etiqueta, sino de <em>mirar lo que sucede con mayor claridad</em> y encontrar nuevas formas de abordarlo.
+              </p>
+              <div className="experience-cards">
+                <article>
+                  <h3>Un espacio a medida</h3>
+                  <p>Trabajo con jóvenes, adultos y parejas. Cuando la situación lo requiere, el proceso también incluye a las familias.</p>
+                </article>
+                <article>
+                  <h3>Una mirada amplia</h3>
+                  <p>Mi recorrido reúne experiencia en ámbitos clínicos, educativos, sociales y empresariales, junto a equipos interdisciplinarios.</p>
+                </article>
+                <article>
+                  <h3>Formación en movimiento</h3>
+                  <p>Formada en la UBA y en actualización permanente en clínica, adolescencias, evaluación psicológica, sexualidad, género y diversidad.</p>
+                </article>
+              </div>
+              <p className="experience-signature">Cada proceso es único. Y merece ser escuchado como tal.</p>
             </div>
           </div>
         </section>
