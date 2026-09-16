@@ -40,7 +40,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/consultorio_vinculandonos";
 const navItems = [
   ["Inicio", "#inicio"],
   ["Sobre mí", "#sobre-mi"],
-  ["Acompañamiento", "#acompanamiento"],
+  ["Con quién trabajo", "#acompanamiento"],
   ["Modalidad", "#modalidad"],
   ["Preguntas frecuentes", "#preguntas"],
   ["Contacto", "#contacto"],
@@ -61,7 +61,7 @@ const people = [
   },
   {
     title: "Adolescentes",
-    text: "Acompañamiento durante una etapa atravesada por importantes cambios personales, vinculares y emocionales.",
+    text: "Abordaje terapéutico durante una etapa atravesada por importantes cambios personales, vinculares y emocionales.",
     icon: HeartHandshake,
     number: "03",
   },
@@ -411,7 +411,7 @@ export default function Home() {
               <p>Podés escribirme para conocer la disponibilidad de atención psicológica online.</p>
             </div>
             <div className="contact-card">
-              <div><span className="contact-avatar">SD</span><p><strong>Lic. Silvina De Simone</strong><small>Consultorio Vinculándonos</small></p></div>
+              <div><p><strong>Lic. Silvina De Simone</strong><small>Consultorio Vinculándonos</small></p></div>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Escribir a Silvina por WhatsApp"><MessageCircle aria-hidden="true" /><span><small>WhatsApp</small>+54 9 11 6057-1233</span><ArrowUpRight aria-hidden="true" /></a>
               <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram de Consultorio Vinculándonos"><AtSign aria-hidden="true" /><span><small>Instagram</small>@consultorio_vinculandonos</span><ArrowUpRight aria-hidden="true" /></a>
             </div>
@@ -421,11 +421,11 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="shell footer-top">
-          <div><a className="brand footer-brand" href="#inicio"><span className="brand-mark" aria-hidden="true">V</span><span>Vinculándonos</span></a><p>Lic. Silvina De Simone<br />Psicología · Atención online</p></div>
+          <div><a className="brand footer-brand" href="#inicio"><span>Lic. Silvina De Simone</span></a><p>Psicología · Atención online</p></div>
           <nav aria-label="Enlaces del pie de página">{navItems.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</nav>
           <div className="footer-social"><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={14} aria-hidden="true" /></a><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
         </div>
-        <div className="shell footer-bottom"><span>© {new Date().getFullYear()} Consultorio Vinculándonos</span><span>Atención online</span></div>
+        <div className="shell footer-bottom"><span>© {new Date().getFullYear()} Lic. Silvina De Simone</span><span>Atención online</span></div>
       </footer>
 
       <a className="whatsapp-float" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Agendar un turno por WhatsApp"><MessageCircle aria-hidden="true" /><span>Agendar un turno</span></a>
