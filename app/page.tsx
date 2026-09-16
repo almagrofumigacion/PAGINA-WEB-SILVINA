@@ -74,6 +74,13 @@ const people = [
   },
 ];
 
+const personCardImages: Record<string, string> = {
+  "Jóvenes y adultos": "/jovenes-adultos-preview.png",
+  "Argentinos en el exterior": "/argentinos-exterior.png",
+  "Adolescentes": "/adolescentes.png",
+  "Familias": "/familias.png",
+};
+
 const topics = [
   "Vínculos",
   "Ansiedad",
@@ -275,40 +282,29 @@ export default function Home() {
               <p>La primera consulta puede ayudarnos a revisar por dónde empezar.</p>
             </div>
             <div className="people-grid">
-              {people.map(({ title, text, icon: Icon, number }) => (
-                <article
-                  className="person-card reveal"
-                  key={title}
-                  style={
-                    title === "Jóvenes y adultos"
-                      ? {
-                          color: "#f7f4ed",
-                          borderColor: "transparent",
-                          background:
-                            "linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.78) 48%, rgba(31,69,55,.2) 100%), url('/jovenes-adultos-preview.png') 50% 50% / cover",
-                        }
-                      : undefined
-                  }
-                >
-                  <div
-                    className="card-top"
-                    style={
-                      title === "Jóvenes y adultos"
-                        ? { color: "rgba(247,244,237,.86)" }
-                        : undefined
+              {people.map(({ title, text, icon: Icon, number }) => {
+                const image = personCardImages[title];
+                const imageStyle = image
+                  ? {
+                      color: "#f7f4ed",
+                      borderColor: "transparent",
+                      backgroundImage: `linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.77) 52%, rgba(31,69,55,.2) 100%), url('${image}')`,
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
                     }
-                  >
-                    <Icon aria-hidden="true" />
-                    <span>{number}</span>
-                  </div>
-                  <h3 style={title === "Jóvenes y adultos" ? { color: "#fffdf8" } : undefined}>
-                    {title}
-                  </h3>
-                  <p style={title === "Jóvenes y adultos" ? { color: "rgba(247,244,237,.86)" } : undefined}>
-                    {text}
-                  </p>
-                </article>
-              ))}
+                  : undefined;
+
+                return (
+                  <article className="person-card reveal" key={title} style={imageStyle}>
+                    <div className="card-top" style={image ? { color: "rgba(247,244,237,.86)" } : undefined}>
+                      <Icon aria-hidden="true" />
+                      <span>{number}</span>
+                    </div>
+                    <h3 style={image ? { color: "#fffdf8" } : undefined}>{title}</h3>
+                    <p style={image ? { color: "rgba(247,244,237,.86)" } : undefined}>{text}</p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
