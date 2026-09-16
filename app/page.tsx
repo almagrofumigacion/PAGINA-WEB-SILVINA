@@ -85,15 +85,6 @@ const topics = [
   "Adolescencia",
 ];
 
-const experience = [
-  ["2006 — 2012", "Licenciada en Psicología", "Universidad de Buenos Aires"],
-  ["2015 — Actualidad", "Fundadora y Psicóloga", "Espacio Vinculándonos"],
-  ["2020 — 2024", "Coordinadora de Equipo de Orientación Escolar", "Instituto Club Atlético Banfield"],
-  ["2023 — 2024", "Psicóloga · Equipo Multidisciplinario", "Consultorio Faro Sur"],
-  ["2018 — 2020", "Psicóloga en Equipo Técnico", "Servicio Local de Niñez · Desarrollo Social Lomas de Zamora"],
-  ["2016 — 2017", "Asesora Profesional en Discapacidad", "Grupo OSDE"],
-];
-
 const faq = [
   ["¿Las sesiones son online?", "Sí. La atención se realiza de manera online."],
   ["¿Atendés personas que viven fuera de Argentina?", "Sí. La modalidad online permite acompañar también a argentinos que actualmente viven en el exterior."],
@@ -113,6 +104,8 @@ const structuredData = {
   availableLanguage: "es",
   areaServed: ["Argentina", "Worldwide"],
   serviceType: ["Psicología online", "Terapia online"],
+  description: "Terapia para jóvenes y adultos. Atención online para jóvenes, adultos, terapia de parejas y argentinos en el extranjero.",
+  keywords: "Terapia para jóvenes y adultos, psicóloga UBA, atención psicológica online, terapia de parejas, argentinos en el extranjero",
   founder: { "@type": "Person", name: "Silvina De Simone", jobTitle: "Licenciada en Psicología" },
 };
 
@@ -183,10 +176,10 @@ export default function Home() {
             />
             <span className="hero-gradient" aria-hidden="true" />
             <div className="hero-copy">
-              <p className="eyebrow"><span aria-hidden="true" /> Psicología online</p>
-              <h1>Psicóloga online para jóvenes y adultos</h1>
-              <p className="hero-lead">Un espacio de escucha y acompañamiento para trabajar aquello que hoy te preocupa, te angustia o genera malestar.</p>
-              <p className="hero-secondary">Atención online para jóvenes y adultos, incluyendo argentinos que viven en el exterior.</p>
+              <p className="eyebrow"><span aria-hidden="true" /> Lic. Silvina De Simone · Psicóloga · UBA</p>
+              <h1>Terapia para jóvenes y adultos.</h1>
+              <p className="hero-lead">Todos necesitamos que nos escuchen. Si necesitás hablar, podés escribirme.</p>
+              <p className="hero-secondary">Atención online para jóvenes, adultos, terapia de parejas y argentinos en el extranjero.</p>
               <div className="hero-actions">
                 <WhatsappButton>Agendar un turno</WhatsappButton>
                 <a className="text-link" href="#sobre-mi">Conocer más <ArrowDown size={15} aria-hidden="true" /></a>
@@ -203,7 +196,7 @@ export default function Home() {
               <h2>Un espacio para poder hablar de lo que te pasa</h2>
             </div>
             <div className="about-copy reveal">
-              <p className="large-copy">Soy Silvina De Simone, Licenciada en Psicología en la Universidad de Buenos Aires. Desde hace más de 13 años acompaño a adolescentes, jóvenes, adultos y familias en distintos momentos y procesos de sus vidas.</p>
+              <p className="large-copy">Soy Silvina De Simone, Licenciada en Psicología en la Universidad de Buenos Aires. Desde hace más de 13 años trabajo con adolescentes, jóvenes, adultos, familias y parejas en distintos momentos y procesos de sus vidas.</p>
               <p>Mi trabajo busca ofrecer un espacio de escucha, reflexión y acompañamiento, respetando los tiempos, experiencias y particularidades de cada persona.</p>
               <div className="credentials" aria-label="Información profesional destacada">
                 <div><strong>+13</strong><span>años de experiencia</span></div>
@@ -218,7 +211,7 @@ export default function Home() {
           <div className="shell">
             <div className="section-heading split-heading reveal">
               <div><p className="section-number">02 · Acompañamiento</p><h2>¿A quién está dirigido?</h2></div>
-              <p>La consulta puede abrir un espacio propio o acompañar un proceso familiar. Cada recorrido comienza desde una situación singular.</p>
+              <p>La primera consulta puede ayudarnos a revisar por dónde empezar.</p>
             </div>
             <div className="people-grid">
               {people.map(({ title, text, icon: Icon, number }) => (
@@ -258,25 +251,20 @@ export default function Home() {
         </section>
 
         <section className="experience section" aria-labelledby="experience-title">
-          <div className="shell experience-grid">
+          <div className="shell experience-grid" style={{ gridTemplateColumns: "1fr" }}>
             <div className="experience-heading reveal">
               <p className="section-number">05 · Recorrido profesional</p>
               <h2 id="experience-title">Experiencia y formación</h2>
               <p>Un recorrido clínico e institucional que aporta una mirada amplia, sensible y comprometida.</p>
               <div className="continuous-learning"><Check aria-hidden="true" /><span>Formación continua en adolescencia, discapacidad, diversidad, sexualidad, género y evaluación psicológica.</span></div>
             </div>
-            <ol className="timeline reveal">
-              {experience.map(([date, role, place]) => (
-                <li key={`${role}-${place}`}><span className="timeline-dot" aria-hidden="true" /><time>{date}</time><h3>{role}</h3><p>{place}</p></li>
-              ))}
-            </ol>
           </div>
         </section>
 
         <section className="main-cta section">
           <div className="shell main-cta-inner reveal">
             <span className="cta-icon" aria-hidden="true"><Link2 /></span>
-            <h2>Dar el primer paso también puede ser parte del proceso.</h2>
+            <h2>Dar el primer paso <em>ya es el proceso</em>.</h2>
             <p>Si querés realizar una consulta o conocer la disponibilidad de turnos, podés escribirme.</p>
             <WhatsappButton>Agendar un turno</WhatsappButton>
           </div>
