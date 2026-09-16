@@ -276,9 +276,37 @@ export default function Home() {
             </div>
             <div className="people-grid">
               {people.map(({ title, text, icon: Icon, number }) => (
-                <article className="person-card reveal" key={title}>
-                  <div className="card-top"><Icon aria-hidden="true" /><span>{number}</span></div>
-                  <h3>{title}</h3><p>{text}</p>
+                <article
+                  className="person-card reveal"
+                  key={title}
+                  style={
+                    title === "Jóvenes y adultos"
+                      ? {
+                          color: "#f7f4ed",
+                          borderColor: "transparent",
+                          background:
+                            "linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.78) 48%, rgba(31,69,55,.2) 100%), url('/jovenes-adultos-preview.png') 50% 50% / cover",
+                        }
+                      : undefined
+                  }
+                >
+                  <div
+                    className="card-top"
+                    style={
+                      title === "Jóvenes y adultos"
+                        ? { color: "rgba(247,244,237,.86)" }
+                        : undefined
+                    }
+                  >
+                    <Icon aria-hidden="true" />
+                    <span>{number}</span>
+                  </div>
+                  <h3 style={title === "Jóvenes y adultos" ? { color: "#fffdf8" } : undefined}>
+                    {title}
+                  </h3>
+                  <p style={title === "Jóvenes y adultos" ? { color: "rgba(247,244,237,.86)" } : undefined}>
+                    {text}
+                  </p>
                 </article>
               ))}
             </div>
