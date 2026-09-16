@@ -320,3 +320,5 @@ h1 { max-width: 550px; margin: 0; font-family: Georgia, 'Times New Roman', serif
 .person-card-exterior:hover { background-image: linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.76) 52%, rgba(31,69,55,.18) 100%), url('/argentinos-exterior.png'); }
 .person-card-adolescents:hover { background-image: linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.77) 52%, rgba(31,69,55,.2) 100%), url('/adolescentes.png'); }
 .person-card-families:hover { background-image: linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.76) 52%, rgba(31,69,55,.2) 100%), url('/familias.png'); }
+/* Sin efecto hover en las tarjetas de acompañamiento */
+.person-card-featured:hover, .person-card-exterior:hover, .person-card-adolescents:hover, .person-card-families:hover { transform: none; box-shadow: none; }
