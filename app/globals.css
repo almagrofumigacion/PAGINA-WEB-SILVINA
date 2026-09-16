@@ -322,3 +322,10 @@ h1 { max-width: 550px; margin: 0; font-family: Georgia, 'Times New Roman', serif
 .person-card-families:hover { background-image: linear-gradient(90deg, rgba(26,61,49,.94) 0%, rgba(31,69,55,.76) 52%, rgba(31,69,55,.2) 100%), url('/familias.png'); }
 /* Sin efecto hover en las tarjetas de acompañamiento */
 .person-card-featured:hover, .person-card-exterior:hover, .person-card-adolescents:hover, .person-card-families:hover { transform: none; box-shadow: none; }
+/* Las imágenes se mantienen inmóviles */
+.person-card-featured,
+.person-card-exterior,
+.person-card-adolescents,
+.person-card-families {
+  pointer-events: none;
+}
