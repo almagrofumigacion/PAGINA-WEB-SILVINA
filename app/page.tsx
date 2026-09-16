@@ -98,7 +98,7 @@ const structuredData = {
   name: "Lic. Silvina De Simone",
   alternateName: "Consultorio Vinculándonos",
   url: "https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site",
-  image: "https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site/silvina-hero.png",
+  image: "https://consultorio-vinculandonos-silvina.serviojoaquin.chatgpt.site/silvina-hero-hd.png",
   telephone: "+5491160571233",
   sameAs: [INSTAGRAM_URL],
   availableLanguage: "es",
@@ -226,7 +226,7 @@ export default function Home() {
           <figure className="shell hero-frame">
             <Image
               className="hero-image"
-              src="/silvina-hero.png"
+              src="/silvina-hero-hd.png"
               alt="Lic. Silvina De Simone, psicóloga y fundadora de Consultorio Vinculándonos"
               width={1600}
               height={900}
